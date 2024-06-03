@@ -20,10 +20,15 @@ export const useForm = (initialForm: IUseForm = {}) => {
         });
     };
 
+    const onResetForm = () => {
+        setFormState(initialForm);
+    }
+
 
     return {
         ...formState,
         formState,
         onInputChange,
+        onResetForm,
     };
 }
