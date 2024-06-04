@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface IShowIncrement {
-    increment: () => void;
+    increment: (step:number) => void;
 }
 
 export const ShowIncrement = React.memo(({ increment }: IShowIncrement) => {
@@ -12,7 +12,7 @@ export const ShowIncrement = React.memo(({ increment }: IShowIncrement) => {
     return (
         <button
             className="btn btn-outline-success"
-            onClick={() => increment()}
+            onClick={() => increment(5)}
         >
             Incrementar
         </button>
