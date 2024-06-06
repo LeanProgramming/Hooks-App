@@ -1,64 +1,35 @@
-import { useEffect, useReducer } from 'react';
-import { toDoReducer } from './toDoReducer';
-import { IState, IAction } from './types'
 import { ToDoList, ToDoAdd } from './components/';
-
-const initialState: IState[] = [
-    // {
-    //     id: new Date().getTime(),
-    //     description: 'Recolectar la piedra del Alma.',
-    //     done: false,
-    // },
-    // {
-    //     id: new Date().getTime() * 3,
-    //     description: 'Recolectar la piedra del Poder.',
-    //     done: false,
-    // }
-];
-
-const init = () => {
-    return JSON.parse(localStorage.getItem('toDos')!)  || [];
-}
+import { useTodo } from '../hooks';
 
 
 export const ToDoApp = () => {
 
-    const [toDos, dispatch] = useReducer(toDoReducer, initialState, init);
-
-    useEffect(() => {
-        localStorage.setItem('toDos', JSON.stringify(toDos));
-    }, [toDos]);
-
-    const handleNewTodo = (todo: IState) => {
-        const action: IAction = {
-            type: '[TODO] Add ToDo',
-            payload: todo
-        }
-
-        dispatch( action );
-    }
-
-    const handleRemoveTodo = (todo: IState) => {
-        dispatch({
-            type: '[TODO] Remove ToDo',
-            payload: todo,
-        });
-    }
+    const { toDos, totalToDos, pendingToDosCount, handleNewTodo, handleDeleteTodo, handleToggleTodo } = useTodo()
 
     return (
         <>
-            <h1>ToDoApp: 10, <small>pendientes: 2</small> </h1>
+            <h1>ToDoApp</h1>
             <hr />
-
+            <h2>
+                Total de tareas: {totalToDos} -
+                <small>
+                    Tareas pendientes: {pendingToDosCount}
+                </small>
+            </h2>
+            <hr />
             <div className="row">
                 <div className="col-7">
-                    <ToDoList toDos={toDos} onDeleteTodo={handleRemoveTodo} />
+                    <ToDoList
+                        toDos={toDos}
+                        onDeleteTodo={handleDeleteTodo}
+                        onToggleTodo={handleToggleTodo}
+                    />
                 </div>
 
                 <div className="col-5">
                     <h4>Agregar TODO</h4>
                     <hr />
-                    <ToDoAdd onNewTodo={handleNewTodo}/>
+                    <ToDoAdd onNewTodo={handleNewTodo} />
                 </div>
             </div>
 
