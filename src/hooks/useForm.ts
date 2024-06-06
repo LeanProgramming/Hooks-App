@@ -4,6 +4,7 @@ interface IUseForm {
     username?: string;
     email?: string;
     password?: string;
+    description?: string;
 }
 
 

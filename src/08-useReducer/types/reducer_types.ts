@@ -1,6 +1,6 @@
 export interface IState {
   id: number;
-  description: string;
+  description: string | undefined;
   done: boolean;
 }
 
