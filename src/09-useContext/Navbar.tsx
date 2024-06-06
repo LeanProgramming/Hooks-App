@@ -7,7 +7,7 @@ export const Navbar = () => {
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">useContext</Link>
 
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className="container">
                     <ul className="navbar-nav">
 
                         <li className="nav-item">
